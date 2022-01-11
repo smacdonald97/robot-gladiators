@@ -17,7 +17,22 @@ var enemyAttack = 12;
 
 var fight = function(enemyName) {
     // Alert players that they are starting the round
-    window.alert("Welcome to Robot Gladiators!");
+    if (playerHealth > 0) {
+        window.alert("Welcome to Robot Gladiators! Round" + (i + 1));
+
+        var pickedEnemyName = enemyNames[i];
+        enemyHealth = 50;
+
+        debugger;
+
+        fight(pickedEnemyName);
+
+    }
+
+    else {
+        window.alert("You have lost your robot in battle! Game Over!");
+        break;
+    }
 
     while(playerHealth > 0 && enemyHealth > 0) {
 
