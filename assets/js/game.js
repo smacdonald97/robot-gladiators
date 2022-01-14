@@ -10,7 +10,7 @@ var enemyAttack = 12;
 console.log(enemyNames);
 console.log(enemyNames.length);
 console.log(enemyNames[0]);
-console.log(enemyNames[3]);
+console.log(enemyNames[2]);
 
 var fight = function(enemyName) {
     while (playerHealth > 0 && enemyHealth > 0) {
@@ -67,6 +67,16 @@ var startGame =function() {
             enemyHealth = 50;
 
             fight(pickedEnemyName);
+
+            if (playerHealth > 0 && i < enemyNames.length - 1){
+                var storeConfirm = window.confirm ("The fight is over, visit the store before the next round?");
+
+                if (storeConfirm) {
+                    shop();
+                }
+
+                shop();
+            }
         }
 
         else {
@@ -75,6 +85,45 @@ var startGame =function() {
         }
     }
     endGame();
+
+    var shop = function() {
+        var shopOptionPrompt = window.prompt ("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice.");
+
+        switch (shopOptionPrompt) {
+            case "REFILL":
+            case "refill":
+                if(playerMoney >= 7){
+                    window.alert("Refilling player's health by 20 for 7 dollars.");
+                    playerHealth= playerHealth +20;
+                    playerMoney= playerMoney -7;
+                }
+                else {
+                    window.alert("You don't have enough money!");
+                }
+                break;
+            case "UPGRADE":
+            case "upgrade":
+                if(playerMoney >=7) {
+                    window.alert ("Upgrading player's attack by 6 for 7 dollars.");
+                    playerAttack = playerAttack +6;
+                    playerMoney = playerMoney -7;
+                }
+                else {
+                    window.alert("You don't have enought money!");
+                }
+                break;
+            case "LEAVE":
+            case "leave":
+                window.alert ("Leaving the store.");
+                break;
+            default:
+                window.alert("You did not pick a valid option. Try again.");
+                shop();
+                break;
+        }
+    };
+
+    startGame();
 };
 
 var endGame = function() {
